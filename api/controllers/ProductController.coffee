@@ -23,4 +23,11 @@ ProductController =
 
     res.ok {product: product}
 
+    db.product.findOne(
+      name: productdata.name
+      descript: productdata.descript
+      stockQuantity: productdata.stockQuantity
+      price: productdata.price
+    )
+
 module.exports = ProductController
