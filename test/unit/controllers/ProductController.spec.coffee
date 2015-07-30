@@ -1,4 +1,4 @@
-describe "about Product", (done) ->
+describe.only "about Product", (done) ->
 
   it "get product info.", (done) ->
 
