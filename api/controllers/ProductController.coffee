@@ -18,7 +18,7 @@ ProductController =
       stockQuantity: productdata.stockQuantity
       price: productdata.price
     ).then(product) -> {
-     res.ok {product: product}
+      res.ok {product: product}
     }
 
 module.exports = ProductController
