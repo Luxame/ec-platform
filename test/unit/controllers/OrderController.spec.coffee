@@ -41,10 +41,10 @@ describe "about Order", (done) ->
       console.log '=== before test create newUser==='
       db.User.create(newUser).then (newUser) ->
         console.log '=== create newOrder ==='
-        
+
         newOrder = {
           quantity:10
-          orderId:'11223344'
+          serialnumber:'11223344'
           UserId:newUser.id
         }
 

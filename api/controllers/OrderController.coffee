@@ -21,7 +21,7 @@ OrderController =
         descript: '又大又好吃'
         stockQuantity: 10
         price: 100
-        id: 1
+        serialnumber: 1
       }
     }
 
@@ -32,8 +32,15 @@ OrderController =
       success: success
     }
   status:  (req, res) ->
-    console.log req.body.orderId
+    console.log req.body.serialnumber
     console.log req.body.email
+
+  serialnumber::yyyymmddxxxx = ->
+    yyyy = @getFullYear().toString()
+    mm = (@getMonth() + 1).toString()
+    dd = @getDate().toString()
+    xxxx = (maxNum = 9999, minNum = 0000, n = Math.usefloor(Math.random() * (maxNum - minNum + 1)) + minNum)
+    return yyyy + (if mm[1] then mm else '0' + mm[0]) + (if dd[1] then dd else '0' + dd[0])+(if xxxx[0] then xxxx else '0' + xxxx[0])
 
     db.User.findOne(
       where:
@@ -44,13 +51,13 @@ OrderController =
 
       db.Order.findOne(
         where:
-          orderId:req.body.orderId
+          serialnumber:req.body.serialnumber
           UserId:userData.id
       )
       .then (orderProduct) ->
         if orderProduct?
           order = {
-              id: orderProduct.orderId
+              serialnumber: orderProduct.serialnumber
               quantity: orderProduct.quantity
               user: {
                 username: userData.username
@@ -63,6 +70,10 @@ OrderController =
         else
           #沒有此訂單編號時在這處理
           res.ok { msg: '沒有此訂單' }
+
+
+
+
 
 
 module.exports = OrderController
